@@ -41,6 +41,7 @@ function GUI() {
         createButton("save", "save.png", new THREE.Vector3(right - buttonSize, top, 0));
         createButton("load", "load.png", new THREE.Vector3(right - buttonSize, top - buttonSize - spacing, 0));
         createButton("export", "export.png", new THREE.Vector3(right - buttonSize, top - (buttonSize + spacing)*2, 0));
+        createButton("import", "import.png", new THREE.Vector3(right - buttonSize, top - (buttonSize + spacing)*3, 0));
 
         createButton("create-box", "cube.png", new THREE.Vector3(left, bottom + buttonSize, 0));
         createButton("create-plane", "plane.png", new THREE.Vector3(left + (buttonSize + spacing), bottom + buttonSize, 0));

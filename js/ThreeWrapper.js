@@ -29,7 +29,15 @@ function ThreeWrapper() {
     gui.setSelected("position");
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+
+    var container = document.getElementById( "canvas" );
+    document.body.appendChild( container );
+
+
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize( 200, 200 );
+    container.appendChild( renderer.domElement );
+    //document.body.appendChild(renderer.domElement);
     camera.position.z = 5;
     camera.add(gui.group);
     scene.add(camera);
@@ -136,6 +144,14 @@ function ThreeWrapper() {
     }
 
     /**
+     * Get string from Prompt and start scene
+     * @constructor
+     */
+    function ImportScene() {
+
+    }
+
+    /**
      * When gui button is pressed
      * @param buttonName
      */
@@ -156,6 +172,9 @@ function ThreeWrapper() {
                     break;
                 case "export" :
                     ExportScene();
+                    break;
+                case "import" :
+                    ImportScene();
                     break;
                 case "create" :
                     var type = buttonName.split("-")[1];
@@ -223,7 +242,6 @@ function ThreeWrapper() {
         }
 
     }
-
 
     function initMeshes() {
         objectsMap = {};

@@ -78,18 +78,21 @@ function AxisControl(mainCamera, mainRenderer) {
      * @param axisMesh
      */
     function onAxisPressed(mouseEvent, axisMesh) {
-        if (attachedElement == null) return;
+        if (attachedElement == null)
+            return;
         pressed = true;
         touchPlane.visible = true;
         mouseStartPos.x = mouseEvent.clientX;
         mouseStartPos.y = mouseEvent.clientY;
         currentAxis = axisMesh.axis;
+
         if (currentAxis == "x" || currentAxis == "y") {
             touchPlane.rotation.y = 0;
         }
         else {
             touchPlane.rotation.y = Math.PI / 2;
         }
+
         attachedElementStartPos = attachedElement.clone();
     }
 
