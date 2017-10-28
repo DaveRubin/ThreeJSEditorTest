@@ -26,6 +26,7 @@ function ThreeWrapper() {
     window.addEventListener('resize', onWindowResize, false);
     gui.guiCallbacks.push(onGuiPressed);
     gui.initialize();
+    gui.setSelected("position");
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -143,6 +144,7 @@ function ThreeWrapper() {
         if (axisControl.effectTypes.search(buttonName) > -1) {
             console.log("effect : " + buttonName);
             axisControl.setAxisEffect(buttonName);
+            gui.setSelected(buttonName);
         }
         else {
             switch (buttonName.split("-")[0]) {

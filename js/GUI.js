@@ -10,6 +10,8 @@ function GUI() {
     var left = -1.5;
     var right = 1.5;
 
+    var meshMap = {};
+
     function createButton(buttonName, textureName, buttonPosition) {
         var geometry = new THREE.PlaneGeometry(buttonSize, buttonSize, buttonSize);
         var texture = texMap[textureName];
@@ -28,6 +30,7 @@ function GUI() {
 
         self.group.add(plane);
         self.meshes.push(plane);
+        meshMap[buttonName] = plane;
     }
 
     function createButtons() {
@@ -52,6 +55,18 @@ function GUI() {
         self.group = new THREE.Group();
         self.group.position.z = -1.2;
         createButtons();
+    };
+
+    /**
+     * When button gets selected, deselect all but him
+     * @param buttonName
+     */
+    this.setSelected = function(buttonName) {
+        for (var i = 0; i < self.meshes.length; i++) {
+            var obj = self.meshes[i];
+            var selected = obj.buttonName == buttonName;
+            obj.material.color.setHex(selected? 0xaa2277 : 0xffffff);
+        };
     }
 
 }
