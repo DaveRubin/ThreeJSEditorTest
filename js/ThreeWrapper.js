@@ -190,7 +190,12 @@ function ThreeWrapper() {
                 case "create" :
                     var type = buttonName.split("-")[1];
                     console.log("Creating" + type);
-                    self.addSceneObjectToScene(new SceneObject(type));
+                    var newObj = new SceneObject(type)
+                    self.addSceneObjectToScene(newObj);
+                    if (selectedObj != null) selectedObj.setSelected(false);
+                    selectedObj = newObj;
+                    selectedObj.setSelected(true);
+                    axisControl.AttachToElement(selectedObj.getMesh());
             }
         }
     }
