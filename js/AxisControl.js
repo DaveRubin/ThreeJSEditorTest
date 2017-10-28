@@ -59,6 +59,7 @@ function AxisControl(mainCamera, mainRenderer) {
         //set position
         attachedElement = element;
         self.group.visible = true;
+        touchPlane.visible = false;
         updatePosition();
     };
 
@@ -77,6 +78,7 @@ function AxisControl(mainCamera, mainRenderer) {
      * @param axisMesh
      */
     function onAxisPressed(mouseEvent, axisMesh) {
+        if (attachedElement == null) return;
         pressed = true;
         touchPlane.visible = true;
         mouseStartPos.x = mouseEvent.clientX;

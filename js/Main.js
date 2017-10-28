@@ -3,7 +3,7 @@ var Main = new ThreeWrapper();
 function createFloor() {
     var flootSize = 10;
     var geometry = new THREE.PlaneGeometry(flootSize, flootSize, 10, 10);
-    var material = new THREE.MeshBasicMaterial({color: 0xffff00, wireframe: true});
+    var material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
     var plane = new THREE.Mesh(geometry, material);
     plane.position.set(0, -0.5, 0);
     plane.rotation.set(Math.PI / 2, 0, 0);

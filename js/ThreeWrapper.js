@@ -188,7 +188,6 @@ function ThreeWrapper() {
                 tmp.onPressed(event);
             }
             else {
-                console.log("A");
                 if (selectedObj != null) selectedObj.setSelected(false);
                 selectedObj = objectsMap[tmp.uuid];
                 selectedObj.setSelected(true);
