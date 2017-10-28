@@ -29,15 +29,7 @@ function ThreeWrapper() {
     gui.setSelected("position");
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-
-    var container = document.getElementById( "canvas" );
-    document.body.appendChild( container );
-
-
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize( 200, 200 );
-    container.appendChild( renderer.domElement );
-    //document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
     camera.position.z = 5;
     camera.add(gui.group);
     scene.add(camera);
