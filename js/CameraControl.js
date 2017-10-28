@@ -16,10 +16,17 @@ function CameraControl(camera) {
                 moveCamera(1, 0, 0);
                 break;
             case 'w' :
-                moveCamera(0, 1, 0);
+                moveCamera(0, 0, -1);
                 break;
             case 's' :
+                moveCamera(0, 0, 1);
+                break;
+            case 'e' :
+                moveCamera(0, 1, 0);
+                break;
+            case 'c' :
                 moveCamera(0, -1, 0);
+                break;
         }
     });
 }

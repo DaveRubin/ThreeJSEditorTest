@@ -122,20 +122,9 @@ function AxisControl(mainCamera, mainRenderer) {
 
                 var intersects = raycaster.intersectObjects([touchPlane]);
                 if (intersects.length > 0) {
-                    if (dragDelta == null) dragDelta = intersects[0].point[currentAxis] - attachedElementStartPos[effect][currentAxis];
-                    var startP = attachedElementStartPos[effect].x;
+                    if (dragDelta == null)
+                        dragDelta = intersects[0].point[currentAxis] - attachedElementStartPos[effect][currentAxis];
                     attachedElement[effect][currentAxis] = intersects[0].point[currentAxis] - dragDelta;
-                    switch (currentAxis) {
-                    case 'x':
-                        // attachedElement[effect].x = attachedElementStartPos[effect].x + magnitude.x;
-                        break;
-                    case 'y':
-                        // attachedElement[effect].y = attachedElementStartPos[effect].y + magnitude.y;
-                        break;
-                    case 'z':
-                        // attachedElement[effect].z = attachedElementStartPos[effect].y + magnitude.y;
-                        break;
-                }
                 }
             }
 
