@@ -17,7 +17,7 @@ function ThreeWrapper() {
     var clicked = true;
     var gui = new GUI();
     var cc = new CameraControl(camera);
-    var axisControl = new AxisControl(camera,renderer);
+    var axisControl = new AxisControl(camera, renderer);
     var txManager = new TexturesManager();
     txManager.load();
 
@@ -92,7 +92,35 @@ function ThreeWrapper() {
      * @constructor
      */
     function SaveScene() {
-        localStorage.setItem(saveKey,createSceneJson() );
+        localStorage.setItem(saveKey, createSceneJson());
+    }
+
+    /**
+     * Rebuild scene from given json
+     * @param sceneJSON
+     * @constructor
+     */
+    function LoadFromString(sceneJSON) {
+        var loadedObj = JSON.parse(sceneJSON);
+        //clear currentScene
+        Object.keys(objectsMap).forEach(function (key, value, map) {
+            var mesh = objectsMap[key].getMesh();
+            meshes.splice(meshes.lastIndexOf(mesh), 1);
+            scene.remove(mesh);
+        });
+        initMeshes();
+
+        //create all saved objects
+        for (var i = 0; i < loadedObj.objects.length; i++) {
+            var obj = loadedObj.objects[i];
+            var newObj = new SceneObject(obj.type);
+            self.addSceneObjectToScene(newObj);
+            newObj.position(obj.position.x, obj.position.y, obj.position.z);
+            newObj.rotation(obj.rotation.x, obj.rotation.y, obj.rotation.z);
+            newObj.scale(obj.scale.x, obj.scale.y, obj.scale.z);
+        }
+
+        axisControl.Hide();
     }
 
     /**
@@ -102,26 +130,7 @@ function ThreeWrapper() {
     function LoadScene() {
         var savedJSON = localStorage.getItem(saveKey);
         if (savedJSON != null) {
-            var loadedObj = JSON.parse(savedJSON);
-            //clear currentScene
-            Object.keys(objectsMap).forEach(function (key, value, map) {
-                var mesh = objectsMap[key].getMesh();
-                meshes.splice(meshes.lastIndexOf(mesh), 1);
-                scene.remove(mesh);
-            });
-            initMeshes();
-
-            //create all saved objects
-            for (var i = 0; i < loadedObj.objects.length; i++) {
-                var obj = loadedObj.objects[i];
-                var newObj = new SceneObject(obj.type);
-                self.addSceneObjectToScene(newObj);
-                newObj.position(obj.position.x, obj.position.y, obj.position.z);
-                newObj.rotation(obj.rotation.x, obj.rotation.y, obj.rotation.z);
-                newObj.scale(obj.scale.x, obj.scale.y, obj.scale.z);
-            }
-
-            axisControl.Hide();
+            LoadFromString(savedJSON);
         }
 
     }
@@ -140,7 +149,17 @@ function ThreeWrapper() {
      * @constructor
      */
     function ImportScene() {
-
+        var sceneJson = prompt("Please paste scene JSON to IMPORT", "PASTE HERE");
+        if (sceneJson != null) {
+            try {
+                var tmp = JSON.parse(sceneJson);
+                LoadFromString(sceneJson);
+            }
+            catch (e) {
+                // Oh well, but whatever..
+                alert("Invalid json");
+            }
+        }
     }
 
     /**
